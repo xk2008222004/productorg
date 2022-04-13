@@ -17,6 +17,11 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!--打成jar包发布需要配置-->
+        <start-class>springbootdubbo.SpringbootDubboApplication</start-class>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
     </properties>
 
 
@@ -111,6 +116,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
+            </plugin>
+            <!--打成jar包可执行-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
         </plugins>
     </build>
