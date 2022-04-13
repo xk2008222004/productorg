@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springbootdubbo.mapper.ProductMapper">
+
+    <sql id="productQuerySql">
+        id,name,sku_num,sku_stock,sku_price
+    </sql>
+
+    <select id="queryProduct" resultType="com.example.springbootdubbo.po.Product" parameterType="list">
+        select
+        <include refid="productQuerySql"/>
+        from product
+        <if test="list!=null">
+            <where>
+                and id in
+                <foreach collection="list" open="(" close=")" item="proId" separator=",">
+                    #{proId}
+                </foreach>
+            </where>
+        </if>
+
+    </select>
+
+    <update id="updateProduct" parameterType="com.example.springbootdubbo.po.Product">
+        update product
+        <set>
+            <if test="skuStock!=null">
+                sku_stock=#{skuStock}
+            </if>
+        </set>
+        <where>
+            and id=#{id}
+        </where>
+    </update>
+
+
+
+
+</mapper>
